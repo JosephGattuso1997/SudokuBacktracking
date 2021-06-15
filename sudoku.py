@@ -1,12 +1,12 @@
 #Backtracking sudoku solver
 
 import numpy as np
-
-
+import sys
+sys.setrecursionlimit(250)
 # Get the file specified and read it in as a txt
 
 matrixList = []
-filename = 'puzzle5-Gavant'
+filename = 'puzzle1-Gavant'
 file = open('puzzles/' + filename + '.txt').read()
 
 # Loop over the lines of the txt replacing the X with 0 for usability
@@ -26,10 +26,10 @@ board = np.array(list(matrixList),dtype=float).reshape((9,9))
 
 boardLength = 9
 
-
 def solve(board):
-
+    
 # Call getEmpty to get the position of the empty spot to try numbers 1-9
+
     empty = getEmpty(board)
     
     if not empty:
@@ -109,5 +109,9 @@ def saveBoard(board, filename):
 
 # Call the functions and save results
 
-solve(board)
-saveBoard(board, filename)
+if __name__ == '__main__':
+    try:
+        solve(board)
+        saveBoard(board, filename)
+    except Exception as e:
+        print("This puzzle was unable to be solved because", e)
